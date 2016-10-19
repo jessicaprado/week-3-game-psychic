@@ -31,22 +31,19 @@ document.onkeyup = function(event) {
 				guessesLeft--;
 					if(guessesLeft == 0 ) {
 						losses++;
-				
+						guessesLeft = 8;
+						computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+						console.log(computerGuess);
 					}
 				} 
 			else if(userGuess = computerGuess) {
 				wins++;
+				guessesLeft = 8;
 				alert("You got it!");
+				computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+				console.log(computerGuess);
+				}
 
-
-
-
-	
-	}
-
-	//else if (guessesLeft == 0){
-		//game resets
-	//}
 
 
 	//Scoreboard
