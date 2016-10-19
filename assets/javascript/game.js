@@ -1,7 +1,7 @@
 
 // alphabet
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var alphabet1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
 // Scoreboard variables
 var wins = 0;
 var losses = 0;
@@ -20,29 +20,41 @@ var computerGuess = letterChoice(alphabet);
 console.log(computerGuess);
 
 //User guess
-function displayLetters(userGuess , guessesSoFar) {		
-	guessesSoFar.push(userGuess);			
+function displayLetters(userGuess , guessesSoFar, alphabet) {		
+	guessesSoFar.push(userGuess);	
+	
 }
+			
+
+
+function splice(userGuess, alphabet){
+	var guess = userGuess;
+	var numberValue = alphabet.indexOf(guess);	
+	alphabet.splice(numberValue, 1);
+	console.log(alphabet);
+}
+		
 
 document.onkeyup = function(event) {	
+
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
-
-
+		if(alphabet.indexOf(userGuess) >= 0) {
+			
+	
 	//Log and Display user guesses on html	
 		if(userGuess !== computerGuess) {
-				guessesLeft--;
-				alphabet.splice(userGuess);	
-				console.log(alphabet);		
-			}				
+				guessesLeft--;				
+						
+		}				
 				
-			if(guessesLeft == 0 ) {
-				losses++;
-				guessesLeft = 8;
-				computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];	
-				guessesSoFar = []; 	
+		if(guessesLeft == 0 ) {
+			losses++;
+			guessesLeft = 8;
+			computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];	
+			guessesSoFar = []; 	
 
-			
+		
 		} else if(userGuess == computerGuess) {
 			wins++;
 			guessesLeft = 8;
@@ -51,8 +63,13 @@ document.onkeyup = function(event) {
 			guessesSoFar = []; 
 			console.log(computerGuess);
 		}
+		
+		displayLetters(userGuess, guessesSoFar);
+	
+	}
 
-	displayLetters(userGuess, guessesSoFar);
+	splice(userGuess,alphabet);
+	
 
 	//Scoreboard
 	var score = 
@@ -67,6 +84,8 @@ document.onkeyup = function(event) {
 	document.getElementById("game").innerHTML = score;
 
 }
+
+
 
 
 
